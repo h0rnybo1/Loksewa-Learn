@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions - Loksewa Prep</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .faq-container {
+            padding: 60px 0;
+        }
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .faq-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        .faq-header p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .faq-search {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+        
+        .faq-search input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-left: 50px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .faq-search input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .faq-search i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-category {
+            padding: 10px 20px;
+            background-color: var(--bg-secondary);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+        
+        .faq-category.active, .faq-category:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .faq-question h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0;
+            padding-right: 20px;
+            color: var(--text-color);
+        }
+        
+        .faq-question i {
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+        
+        .faq-answer ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        .faq-answer ul li {
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+        
+        .faq-item.active .faq-question {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .faq-item.active .faq-question h3 {
+            color: white;
+        }
+        
+        .faq-item.active .faq-question i {
+            color: white;
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 20px;
+            padding-top: 0;
+        }
+        
+        .faq-contact {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .faq-contact h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        .faq-contact p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Loksewa Prep Logo">
+                <h1>Loksewa Prep</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="syllabus/index.html">Syllabus</a></li>
+                    <li><a href="mock-tests/index.html">Mock Tests</a></li>
+                    <li><a href="study-materials/index.html">Study Materials</a></li>
+                    <li><a href="previous-papers/index.html">Previous Papers</a></li>
+                    <li><a href="tips/index.html">Tips</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="faq.html" class="active">FAQ</a></li>
+                </ul>
+                <div class="theme-toggle">
+                    <input type="checkbox" id="theme-toggle-checkbox">
+                    <label for="theme-toggle-checkbox" class="theme-toggle-label">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                        <div class="ball"></div>
+                    </label>
+                </div>
+                <div class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="faq-container">
+        <div class="container">
+            <div class="faq-header">
+                <h1>Frequently Asked Questions</h1>
+                <p>Find answers to common questions about Loksewa examinations, our platform, and preparation strategies.</p>
+            </div>
+            
+            <div class="faq-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for questions..." id="faq-search-input">
+            </div>
+            
+            <div class="faq-categories">
+                <div class="faq-category active" data-category="all">All Questions</div>
+                <div class="faq-category" data-category="exam">Examination</div>
+                <div class="faq-category" data-category="preparation">Preparation</div>
+                <div class="faq-category" data-category="platform">Platform</div>
+                <div class="faq-category" data-category="account">Account</div>
+            </div>
+            
+            <div class="faq-list">
+                <!-- Examination FAQs -->
+                <div class="faq-item" data-category="exam">
+                    <div class="faq-question">
+                        <h3>What is the Loksewa examination?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The Loksewa examination is a competitive examination conducted by the Public Service Commission (PSC) of Nepal to recruit candidates for various civil service positions in the government. It is designed to assess candidates' knowledge, skills, and aptitude for public service roles.</p>
+                        <p>The examination typically consists of multiple stages, including written tests, practical tests (for technical positions), and interviews. The specific format and content vary depending on the position and level.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="exam">
+                    <div class="faq-question">
+                        <h3>What are the different levels of Loksewa positions?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The Loksewa positions are categorized into different levels based on their rank and responsibilities:</p>
+                        <ul>
+                            <li><strong>Gazetted Positions:</strong> These are officer-level positions divided into Special Class, First Class, Second Class, and Third Class.</li>
+                            <li><strong>Non-Gazetted Positions:</strong> These include First Class, Second Class, Third Class, and Fourth Class positions.</li>
+                            <li><strong>Technical Positions:</strong> These are specialized roles requiring specific technical qualifications in fields like engineering, medicine, agriculture, etc.</li>
+                        </ul>
+                        <p>Each level has different eligibility criteria, examination patterns, and syllabus.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="exam">
+                    <div class="faq-question">
+                        <h3>How often are Loksewa examinations conducted?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The Public Service Commission (PSC) typically conducts Loksewa examinations annually. However, the exact schedule may vary depending on the vacancies in different government departments and the PSC's planning.</p>
+                        <p>Examination notices are published in national newspapers and on the PSC's official website. It's advisable to regularly check these sources for the latest announcements.</p>
+                    </div>
+                </div>
+                
+                <!-- Preparation FAQs -->
+                <div class="faq-item" data-category="preparation">
+                    <div class="faq-question">
+                        <h3>How should I prepare for the Loksewa examination?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Effective preparation for the Loksewa examination involves a structured approach:</p>
+                        <ul>
+                            <li><strong>Understand the Syllabus:</strong> Thoroughly review the syllabus for your target position to understand the topics and subjects covered.</li>
+                            <li><strong>Create a Study Plan:</strong> Develop a realistic study schedule that covers all subjects and allows time for revision.</li>
+                            <li><strong>Use Quality Study Materials:</strong> Utilize comprehensive study materials, textbooks, and reference books recommended for Loksewa preparation.</li>
+                            <li><strong>Practice Previous Papers:</strong> Solve previous years' question papers to understand the examination pattern and types of questions asked.</li>
+                            <li><strong>Take Mock Tests:</strong> Regularly take mock tests to assess your preparation level and improve your time management skills.</li>
+                            <li><strong>Stay Updated:</strong> Keep yourself informed about current affairs, especially those related to Nepal and international events.</li>
+                        </ul>
+                        <p>Our platform provides comprehensive resources for all these aspects of preparation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="preparation">
+                    <div class="faq-question">
+                        <h3>How much time is needed to prepare for the Loksewa examination?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The preparation time for Loksewa examinations varies depending on several factors:</p>
+                        <ul>
+                            <li>The level of the position you're applying for</li>
+                            <li>Your educational background and existing knowledge</li>
+                            <li>The amount of time you can dedicate daily to preparation</li>
+                            <li>Your learning pace and study methods</li>
+                        </ul>
+                        <p>Generally, candidates prepare for 6-12 months for non-gazetted positions and 1-2 years for gazetted positions. However, consistent and focused preparation is more important than the total duration.</p>
+                    </div>
+                </div>
+                
+                <!-- Platform FAQs -->
+                <div class="faq-item" data-category="platform">
+                    <div class="faq-question">
+                        <h3>What resources does Loksewa Prep provide?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Loksewa Prep offers a comprehensive range of resources to help you prepare effectively:</p>
+                        <ul>
+                            <li><strong>Study Materials:</strong> Detailed notes, guides, and resources covering all subjects in the Loksewa syllabus.</li>
+                            <li><strong>Mock Tests:</strong> Practice tests designed to simulate the actual examination experience.</li>
+                            <li><strong>Previous Papers:</strong> Collection of previous years' question papers with detailed solutions.</li>
+                            <li><strong>Syllabus:</strong> Updated syllabus for all Loksewa positions.</li>
+                            <li><strong>Preparation Tips:</strong> Expert advice and strategies to optimize your preparation.</li>
+                        </ul>
+                        <p>All our resources are regularly updated to reflect the latest examination patterns and syllabus changes.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="platform">
+                    <div class="faq-question">
+                        <h3>Are the mock tests on Loksewa Prep similar to the actual examination?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our mock tests are designed to closely resemble the actual Loksewa examinations in terms of:</p>
+                        <ul>
+                            <li>Question format and difficulty level</li>
+                            <li>Time constraints and number of questions</li>
+                            <li>Subject-wise distribution of questions</li>
+                            <li>Marking scheme</li>
+                        </ul>
+                        <p>Our team of experts, including former Loksewa officials and successful candidates, develops these mock tests based on the latest examination patterns and trends. Regular practice with these tests will help you become familiar with the examination format and improve your time management skills.</p>
+                    </div>
+                </div>
+                
+                <!-- Account FAQs -->
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <h3>How do I create an account on Loksewa Prep?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Creating an account on Loksewa Prep is simple:</p>
+                        <ol>
+                            <li>Click on the "Register" button in the top-right corner of the homepage.</li>
+                            <li>Fill in your details in the registration form, including your name, email address, and password.</li>
+                            <li>Verify your email address by clicking on the verification link sent to your email.</li>
+                            <li>Complete your profile by adding additional information such as your target position and educational background.</li>
+                        </ol>
+                        <p>Once registered, you can access all our resources and track your progress.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <h3>Is Loksewa Prep free to use?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Loksewa Prep offers both free and premium content:</p>
+                        <ul>
+                            <li><strong>Free Resources:</strong> Basic study materials, sample mock tests, syllabus information, and preparation tips are available for free.</li>
+                            <li><strong>Premium Content:</strong> Comprehensive study materials, full-length mock tests with detailed solutions, previous papers with analysis, and personalized learning paths are available with our premium subscription.</li>
+                        </ul>
+                        <p>Our premium subscription is designed to be affordable for all aspirants while providing high-quality, comprehensive preparation resources.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-contact">
+                <h2>Didn't Find Your Answer?</h2>
+                <p>If you couldn't find the information you were looking for, please feel free to contact our support team. We're here to help you with any questions or concerns you may have.</p>
+                <a href="contact.html" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <img src="images/logo.png" alt="Loksewa Prep Logo">
+                        <h2>Loksewa Prep</h2>
+                    </div>
+                    <p>A personal project by Suyog Pandey, student at NIST College, to provide free and reliable Loksewa examination preparation resources for fellow students and aspiring civil servants.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="study-materials/index.html">Study Materials</a></li>
+                        <li><a href="mock-tests/index.html">Mock Tests</a></li>
+                        <li><a href="previous-papers/index.html">Previous Papers</a></li>
+                        <li><a href="syllabus/index.html">Syllabus</a></li>
+                        <li><a href="tips/index.html">Preparation Tips</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> NIST College, Lainchaur, Kathmandu</li>
+                        <li><i class="fas fa-phone"></i> +977 9866299930</li>
+                        <li><i class="fas fa-envelope"></i> info@loksewaprep.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Loksewa Prep - Created by Suyog Pandey, NIST College. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // FAQ Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle FAQ answers
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    faqItem.classList.toggle('active');
+                });
+            });
+            
+            // Filter FAQs by category
+            const categoryButtons = document.querySelectorAll('.faq-category');
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Get category value
+                    const category = button.getAttribute('data-category');
+                    
+                    // Filter FAQ items
+                    faqItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('faq-search-input');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    // If search is empty, respect the current category filter
+                    const activeCategory = document.querySelector('.faq-category.active').getAttribute('data-category');
+                    
+                    faqItems.forEach(item => {
+                        if (activeCategory === 'all' || item.getAttribute('data-category') === activeCategory) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                } else {
+                    // Search in all FAQ items regardless of category
+                    faqItems.forEach(item => {
+                        const questionText = item.querySelector('.faq-question h3').textContent.toLowerCase();
+                        const answerText = item.querySelector('.faq-answer').textContent.toLowerCase();
+                        
+                        if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

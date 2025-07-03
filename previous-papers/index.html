@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Papers - Loksewa Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* previous papers styles */
+        .papers-container { padding: 60px 0; }
+        .papers-header { text-align: center; margin-bottom: 40px; }
+        .papers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        .paper-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .paper-card:hover { transform: translateY(-5px); }
+        .paper-header {
+            background: linear-gradient(135deg, #007bff, #28a745);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .paper-content { padding: 20px; }
+        .paper-info { display: flex; justify-content: space-between; margin: 15px 0; }
+        .paper-info span { 
+            background: #f8f9fa; 
+            padding: 5px 10px; 
+            border-radius: 15px; 
+            font-size: 0.9em;
+            color: #666;
+        }
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .download-btn:hover { background: #218838; }
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../images/logo.png" alt="Logo">
+                <h1>Loksewa Prep</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../syllabus/index.html">Syllabus</a></li>
+                    <li><a href="../mock-tests/index.html">Mock Tests</a></li>
+                    <li><a href="../study-materials/index.html">Study Materials</a></li>
+                    <li><a href="../previous-papers/index.html" class="active">Previous Papers</a></li>
+                    <li><a href="../tips/index.html">Tips</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+                <div class="theme-toggle">
+                    <input type="checkbox" id="theme-toggle-checkbox">
+                    <label for="theme-toggle-checkbox" class="theme-toggle-label">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                        <div class="ball"></div>
+                    </label>
+                </div>
+                <div class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="papers-container">
+        <div class="container">
+            <div class="papers-header">
+                <h1>Previous Year Question Papers</h1>
+                <p>Download and practice with actual Loksewa examination papers from previous years</p>
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterPapers('all')">All Papers</button>
+                <button class="filter-btn" onclick="filterPapers('officer')">Officer Level</button>
+                <button class="filter-btn" onclick="filterPapers('nayab-subba')">Nayab Subba</button>
+                <button class="filter-btn" onclick="filterPapers('kharidar')">Kharidar</button>
+                <button class="filter-btn" onclick="filterPapers('technical')">Technical</button>
+            </div>
+
+            <div class="papers-grid">
+                <!-- Section Officer Papers -->
+                <div class="paper-card" data-category="officer">
+                    <div class="paper-header">
+                        <h3>Section Officer Questions 2076</h3>
+                        <p>General Knowledge & Aptitude</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2076</span>
+                            <span><i class="fas fa-clock"></i> 3 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Complete question paper for Section Officer level general knowledge and aptitude examination.</p>
+                        <a href="http://dotnepal.com/section-officer-questions-2076/" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-category="officer">
+                    <div class="paper-header">
+                        <h3>Section Officer Aptitude Test 2076</h3>
+                        <p>First Paper MCQs</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2076</span>
+                            <span><i class="fas fa-clock"></i> 3 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>First paper multiple choice questions for Section Officer aptitude test examination.</p>
+                        <a href="http://dotnepal.com/section-officer-question-2076-section-officer-aptitude-test-question/" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-category="officer">
+                    <div class="paper-header">
+                        <h3>Pararastra Section Officer 2076</h3>
+                        <p>Foreign Affairs English Paper</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2076</span>
+                            <span><i class="fas fa-clock"></i> 3 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>English paper for Foreign Affairs Section Officer examination with detailed questions.</p>
+                        <a href="http://dotnepal.com/pararastra-section-officer-question-2076-for-loksewa-exam-lok-sewa-aayog-officer-question/" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Nayab Subba Papers -->
+                <div class="paper-card" data-category="nayab-subba">
+                    <div class="paper-header">
+                        <h3>Nayab Subba Complete Paper</h3>
+                        <p>2076 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2076</span>
+                            <span><i class="fas fa-clock"></i> 2.5 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Full question paper covering all subjects for Nayab Subba position.</p>
+                        <a href="https://questionbanknepal.com/lok-sewa-aayog-assistant-level-questions/" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-category="nayab-subba">
+                    <div class="paper-header">
+                        <h3>Nayab Subba Questions</h3>
+                        <p>2075 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2075</span>
+                            <span><i class="fas fa-clock"></i> 2.5 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Previous year questions with answers and explanations.</p>
+                        <a href="https://dotnepal.com/nayab-subba-questions-2075-loksewa-questions/" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-category="nayab-subba">
+                    <div class="paper-header">
+                        <h3>Nayab Subba Old Questions</h3>
+                        <p>2074 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2074</span>
+                            <span><i class="fas fa-clock"></i> 2.5 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Collection of previous year questions for practice and preparation.</p>
+                        <a href="https://questionbanknepal.com/nayab-subba/" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Kharidar Papers -->
+                <div class="paper-card" data-category="kharidar">
+                    <div class="paper-header">
+                        <h3>Kharidar Question Paper</h3>
+                        <p>2076 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2076</span>
+                            <span><i class="fas fa-clock"></i> 2 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Complete question paper for Kharidar level examination.</p>
+                        <a href="https://questionbanknepal.com/pscassistantlevel.php" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-category="kharidar">
+                    <div class="paper-header">
+                        <h3>Kharidar Practice Set</h3>
+                        <p>2075 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2075</span>
+                            <span><i class="fas fa-clock"></i> 2 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Practice questions with detailed solutions for better understanding.</p>
+                        <a href="https://questionbanknepal.com/pscassistantlevel.php" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Technical Papers -->
+                <div class="paper-card" data-category="technical">
+                    <div class="paper-header">
+                        <h3>Computer Operator Technical</h3>
+                        <p>2080 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2080</span>
+                            <span><i class="fas fa-clock"></i> 2.5 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Technical subject paper for Computer Operator position with written exam questions.</p>
+                        <a href="http://computeroperatortyari.com/psc-computer-operator-written-exam-question-paper-2080-06-07/" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-category="technical">
+                    <div class="paper-header">
+                        <h3>Health Assistant Questions</h3>
+                        <p>2075 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2075</span>
+                            <span><i class="fas fa-clock"></i> 2.5 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Health science questions for Health Assistant examination.</p>
+                        <a href="https://questionbanknepal.com/health-assistant-questions/" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-category="technical">
+                    <div class="paper-header">
+                        <h3>Engineer Technical Paper</h3>
+                        <p>2074 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2074</span>
+                            <span><i class="fas fa-clock"></i> 3 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Engineering technical questions for various engineering positions.</p>
+                        <a href="https://psc.gov.np/assets/uploads/files/Engineer_Technical_2074.pdf" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- More Recent Papers -->
+                <div class="paper-card" data-category="officer">
+                    <div class="paper-header">
+                        <h3>Section Officer Management</h3>
+                        <p>2077 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2077</span>
+                            <span><i class="fas fa-clock"></i> 3 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Management and administration paper for Section Officer level.</p>
+                        <a href="https://psc.gov.np/assets/uploads/files/Management_2077.pdf" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-category="nayab-subba">
+                    <div class="paper-header">
+                        <h3>Nayab Subba Latest</h3>
+                        <p>2077 B.S.</p>
+                    </div>
+                    <div class="paper-content">
+                        <div class="paper-info">
+                            <span><i class="fas fa-calendar"></i> 2077</span>
+                            <span><i class="fas fa-clock"></i> 2.5 Hours</span>
+                            <span><i class="fas fa-star"></i> 100 Marks</span>
+                        </div>
+                        <p>Most recent Nayab Subba examination paper with updated pattern.</p>
+                        <a href="https://questionbanknepal.com/nayab-subba-2077/" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <img src="../images/logo.png" alt="Logo">
+                        <h2>Loksewa Prep</h2>
+                    </div>
+                    <p>Created by Suyog Pandey, NIST College student</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> suyog@loksewaprep.com</li>
+                        <li><i class="fas fa-phone"></i> +977 9866299930</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Loksewa Prep by Suyog Pandey</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // filter papers function
+        function filterPapers(category) {
+            var papers = document.querySelectorAll('.paper-card');
+            var buttons = document.querySelectorAll('.filter-btn');
+            
+            // remove active class from all buttons
+            buttons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            
+            // add active class to clicked button
+            event.target.classList.add('active');
+            
+            // show/hide papers based on category
+            papers.forEach(function(paper) {
+                if (category === 'all' || paper.getAttribute('data-category') === category) {
+                    paper.style.display = 'block';
+                } else {
+                    paper.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Operator Technical Test - Loksewa Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .test-container { padding: 40px 0; }
+        .test-header { 
+            background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    .question-box {
+        background: white;
+        color: black; /* Add this line */
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+
+        }
+        .question-text { font-size: 1.2em; margin-bottom: 20px; font-weight: 500; }
+        .options { list-style: none; padding: 0; }
+        .options li {
+            background: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .options li:hover { background: #e9ecef; }
+        .options li.selected { background: #e7e3ff; border-color: #6f42c1; }
+        .timer { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            background: #dc3545; 
+            color: white; 
+            padding: 15px; 
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../images/logo.png" alt="Logo">
+                <h1>Loksewa Prep</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="timer" id="timer">50:00</div>
+
+    <section class="test-container">
+        <div class="container">
+            <div class="test-header">
+                <h1>Computer Operator Technical Test</h1>
+                <p>Advanced technical questions for Computer Operator position</p>
+                <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                    <div><i class="fas fa-laptop"></i><br>60 Questions</div>
+                    <div><i class="fas fa-clock"></i><br>50 Minutes</div>
+                    <div><i class="fas fa-star"></i><br>Technical Level</div>
+                </div>
+                <p>Question <span id="current-q">1</span> of 60</p>
+            </div>
+
+            <div class="question-box" id="question-container">
+                <!-- questions here -->
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                <button class="btn btn-secondary" onclick="prevQuestion()">Previous</button>
+                <button class="btn btn-primary" onclick="nextQuestion()">Next</button>
+                <button class="btn btn-primary" onclick="submitTest()" style="display:none;" id="submit-btn">Submit</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // computer operator technical questions
+        var questions = [
+            {
+                q: "Which of the following is NOT a valid IP address class?",
+                options: ["Class A", "Class B", "Class E", "Class F"],
+                correct: 3
+            },
+            {
+                q: "In MS Excel, what does the function =VLOOKUP(A1,B1:D10,3,FALSE) do?",
+                options: [
+                    "Looks up value in A1 and returns corresponding value from 3rd column",
+                    "Counts values in range B1:D10",
+                    "Sums values in column 3",
+                    "Finds maximum value in range"
+                ],
+                correct: 0
+            },
+            {
+                q: "Which protocol is used for secure file transfer over the internet?",
+                options: ["FTP", "HTTP", "SFTP", "SMTP"],
+                correct: 2
+            },
+            {
+                q: "In Windows, which key combination is used to open Task Manager?",
+                options: ["Ctrl+Alt+Del", "Ctrl+Shift+Esc", "Alt+Tab", "Both A and B"],
+                correct: 3
+            },
+            {
+                q: "What is the maximum length of a filename in NTFS file system?",
+                options: ["255 characters", "256 characters", "128 characters", "512 characters"],
+                correct: 0
+            },
+            {
+                q: "Which HTML tag is used to create a hyperlink?",
+                options: ["<link>", "<a>", "<href>", "<url>"],
+                correct: 1
+            },
+            {
+                q: "In database terminology, what does ACID stand for?",
+                options: [
+                    "Atomicity, Consistency, Isolation, Durability",
+                    "Access, Control, Integration, Data",
+                    "Application, Computer, Information, Database",
+                    "Automatic, Consistent, Independent, Distributed"
+                ],
+                correct: 0
+            },
+            {
+                q: "Which of the following is a NoSQL database?",
+                options: ["MySQL", "PostgreSQL", "MongoDB", "Oracle"],
+                correct: 2
+            },
+            {
+                q: "What is the default port number for HTTPS?",
+                options: ["80", "443", "21", "25"],
+                correct: 1
+            },
+            {
+                q: "In MS Word, which feature allows you to automatically correct common typing errors?",
+                options: ["AutoCorrect", "Spell Check", "Grammar Check", "AutoFormat"],
+                correct: 0
+            },
+            {
+                q: "Which of the following is NOT an operating system?",
+                options: ["Linux", "macOS", "Adobe Photoshop", "Windows"],
+                correct: 2
+            },
+            {
+                q: "What does CPU stand for?",
+                options: [
+                    "Central Processing Unit",
+                    "Computer Processing Unit", 
+                    "Central Program Unit",
+                    "Computer Program Unit"
+                ],
+                correct: 0
+            },
+            {
+                q: "In networking, what does DNS stand for?",
+                options: [
+                    "Domain Name System",
+                    "Data Network Service",
+                    "Digital Network Security",
+                    "Dynamic Name Server"
+                ],
+                correct: 0
+            },
+            {
+                q: "Which Excel function is used to count non-empty cells in a range?",
+                options: ["COUNT", "COUNTA", "COUNTIF", "COUNTBLANK"],
+                correct: 1
+            },
+            {
+                q: "What is the binary equivalent of decimal number 15?",
+                options: ["1010", "1111", "1100", "1001"],
+                correct: 1
+            },
+            {
+                q: "Which of the following is a programming language?",
+                options: ["HTTP", "HTML", "Python", "FTP"],
+                correct: 2
+            },
+            {
+                q: "In computer memory, what does RAM stand for?",
+                options: [
+                    "Random Access Memory",
+                    "Read Access Memory",
+                    "Rapid Access Memory",
+                    "Real Access Memory"
+                ],
+                correct: 0
+            },
+            {
+                q: "Which key is used to refresh a web page in most browsers?",
+                options: ["F4", "F5", "F6", "F7"],
+                correct: 1
+            },
+            {
+                q: "What is the full form of URL?",
+                options: [
+                    "Uniform Resource Locator",
+                    "Universal Resource Locator",
+                    "Unique Resource Locator",
+                    "United Resource Locator"
+                ],
+                correct: 0
+            },
+            {
+                q: "Which of the following is an example of system software?",
+                options: ["MS Word", "Operating System", "Web Browser", "Media Player"],
+                correct: 1
+            }
+        ];
+
+        var currentQuestion = 0;
+        var userAnswers = [];
+        var timeLeft = 3000; // 50 minutes
+
+        function startTimer() {
+            setInterval(function() {
+                timeLeft--;
+                var minutes = Math.floor(timeLeft / 60);
+                var seconds = timeLeft % 60;
+                document.getElementById('timer').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                
+                if (timeLeft <= 0) {
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            var q = questions[currentQuestion];
+            var html = '<div class="question-text">' + (currentQuestion + 1) + '. ' + q.q + '</div>';
+            html += '<ul class="options">';
+            
+            for (var i = 0; i < q.options.length; i++) {
+                var selected = userAnswers[currentQuestion] === i ? 'selected' : '';
+                html += '<li class="' + selected + '" onclick="selectAnswer(' + i + ')">' + 
+                       String.fromCharCode(65 + i) + '. ' + q.options[i] + '</li>';
+            }
+            html += '</ul>';
+            
+            document.getElementById('question-container').innerHTML = html;
+            document.getElementById('current-q').innerHTML = currentQuestion + 1;
+            
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('submit-btn').style.display = 'inline-block';
+            }
+        }
+
+        function selectAnswer(index) {
+            userAnswers[currentQuestion] = index;
+            var options = document.querySelectorAll('.options li');
+            options.forEach(function(option, i) {
+                option.classList.remove('selected');
+                if (i === index) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function submitTest() {
+            var score = 0;
+            for (var i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correct) {
+                    score++;
+                }
+            }
+            
+            var percentage = Math.round((score / questions.length) * 100);
+            alert('Technical Test Completed!\nScore: ' + score + '/' + questions.length + ' (' + percentage + '%)');
+            window.location.href = 'index.html';
+        }
+
+        window.onload = function() {
+            loadQuestion();
+            startTimer();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Tests - Loksewa Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* mock tests page styles */
+        .tests-container { padding: 60px 0; }
+        .tests-header { text-align: center; margin-bottom: 40px; }
+        .tests-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+        .test-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .test-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: #007bff;
+        }
+        .test-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .test-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+        .test-header h3 { font-size: 1.4em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .test-level { 
+            background: rgba(255,255,255,0.2); 
+            padding: 5px 15px; 
+            border-radius: 20px; 
+            font-size: 0.85em;
+            position: relative;
+            z-index: 1;
+        }
+        .test-content { padding: 25px 20px; }
+        .test-stats { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .test-stat { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            font-size: 0.9em;
+            color: #666;
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+        .test-stat i { color: #007bff; }
+        .test-description { 
+            color: #555; 
+            line-height: 1.6; 
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        .difficulty-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .difficulty-dots {
+            display: flex;
+            gap: 5px;
+        }
+        .difficulty-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #e9ecef;
+        }
+        .difficulty-dot.active { background: #28a745; }
+        .difficulty-dot.medium { background: #ffc107; }
+        .difficulty-dot.hard { background: #dc3545; }
+        .test-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .test-btn:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+        }
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 12px 25px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+            transform: translateY(-2px);
+        }
+        .search-section {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../images/logo.png" alt="Logo">
+                <h1>Loksewa Prep</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../syllabus/index.html">Syllabus</a></li>
+                    <li><a href="../mock-tests/index.html" class="active">Mock Tests</a></li>
+                    <li><a href="../study-materials/index.html">Study Materials</a></li>
+                    <li><a href="../previous-papers/index.html">Previous Papers</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="tests-container">
+        <div class="container">
+            <div class="tests-header">
+                <h1>Loksewa Mock Tests</h1>
+                <p>Challenge yourself with our comprehensive collection of mock tests designed by Suyog Pandey</p>
+            </div>
+
+            <div class="search-section">
+                <input type="text" class="search-input" placeholder="Search for mock tests..." id="searchInput">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+
+            <div class="filter-section">
+                <button class="filter-btn active" onclick="filterTests('all')">All Tests</button>
+                <button class="filter-btn" onclick="filterTests('officer')">Officer Level</button>
+                <button class="filter-btn" onclick="filterTests('nayab-subba')">Nayab Subba</button>
+                <button class="filter-btn" onclick="filterTests('kharidar')">Kharidar</button>
+                <button class="filter-btn" onclick="filterTests('technical')">Technical</button>
+            </div>
+
+            <div class="tests-grid">
+                <!-- Advanced Tests -->
+                <div class="test-card" data-category="officer">
+                    <div class="test-header">
+                        <h3>Section Officer Advanced Test</h3>
+                        <span class="test-level">Officer Level - Advanced</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>75 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>60 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>856 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Challenging questions covering constitutional law, public administration, and current affairs for serious aspirants.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                            </div>
+                        </div>
+                        <a href="section-officer-advanced.html" class="test-btn">Start Advanced Test</a>
+                    </div>
+                </div>
+
+                <div class="test-card" data-category="officer">
+                    <div class="test-header">
+                        <h3>Section Officer General Knowledge</h3>
+                        <span class="test-level">Officer Level</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>50 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>45 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>1,245 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Comprehensive test covering general knowledge, current affairs, and Nepal's history and geography.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot"></div>
+                            </div>
+                        </div>
+                        <a href="section-officer-gk.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+
+                <div class="test-card" data-category="nayab-subba">
+                    <div class="test-header">
+                        <h3>Nayab Subba Full Mock Test</h3>
+                        <span class="test-level">Non-Gazetted First</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>100 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>90 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>2,567 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Complete mock test covering all subjects including Nepali, English, Math, and General Knowledge.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot"></div>
+                            </div>
+                        </div>
+                        <a href="nayab-subba-full.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+
+                <div class="test-card" data-category="kharidar">
+                    <div class="test-header">
+                        <h3>Kharidar Practice Test</h3>
+                        <span class="test-level">Non-Gazetted Second</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>75 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>45 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>1,876 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Comprehensive test for Kharidar level covering Nepali, English, Math, and General Knowledge.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot"></div>
+                                <div class="difficulty-dot"></div>
+                            </div>
+                        </div>
+                        <a href="kharidar-practice.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+
+                <div class="test-card" data-category="technical">
+                    <div class="test-header">
+                        <h3>Computer Operator Technical Test</h3>
+                        <span class="test-level">Technical Position</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>60 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>50 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>1,120 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Advanced technical test covering computer fundamentals, networking, and office applications.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot"></div>
+                            </div>
+                        </div>
+                        <a href="computer-operator-tech.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+
+                <!-- More Tests -->
+                <div class="test-card" data-category="nayab-subba">
+                    <div class="test-header">
+                        <h3>Nayab Subba Mathematics</h3>
+                        <span class="test-level">Subject Specific</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>40 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>35 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>1,432 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Focused mathematics test covering arithmetic, algebra, geometry, and logical reasoning.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot"></div>
+                            </div>
+                        </div>
+                        <a href="nayab-subba-math.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+
+                <div class="test-card" data-category="kharidar">
+                    <div class="test-header">
+                        <h3>Kharidar English Test</h3>
+                        <span class="test-level">Language Specific</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>30 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>25 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>987 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">English language test covering grammar, vocabulary, comprehension, and basic communication.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot active"></div>
+                                <div class="difficulty-dot active"></div>
+                                <div class="difficulty-dot"></div>
+                                <div class="difficulty-dot"></div>
+                            </div>
+                        </div>
+                        <a href="kharidar-english.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+
+                <div class="test-card" data-category="officer">
+                    <div class="test-header">
+                        <h3>Section Officer Public Administration</h3>
+                        <span class="test-level">Specialized Subject</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>50 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>60 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>743 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Specialized test on public administration concepts, governance, and management principles.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                                <div class="difficulty-dot hard active"></div>
+                            </div>
+                        </div>
+                        <a href="section-officer-admin.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+
+                <div class="test-card" data-category="technical">
+                    <div class="test-header">
+                        <h3>Health Assistant Practice</h3>
+                        <span class="test-level">Health Sector</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>45 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>40 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>654 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Health science questions covering anatomy, physiology, community health, and medical procedures.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot"></div>
+                            </div>
+                        </div>
+                        <a href="health-assistant.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+
+                <!-- Quick Practice Tests -->
+                <div class="test-card" data-category="nayab-subba">
+                    <div class="test-header">
+                        <h3>Quick GK Practice</h3>
+                        <span class="test-level">Quick Test</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>20 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>15 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>2,134 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Quick general knowledge practice test for daily preparation and revision.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot active"></div>
+                                <div class="difficulty-dot active"></div>
+                                <div class="difficulty-dot"></div>
+                                <div class="difficulty-dot"></div>
+                            </div>
+                        </div>
+                        <a href="quick-gk-practice.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+
+                <div class="test-card" data-category="kharidar">
+                    <div class="test-header">
+                        <h3>Nepali Language Test</h3>
+                        <span class="test-level">Language Focus</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <div class="test-stat">
+                                <i class="fas fa-question-circle"></i>
+                                <span>35 Questions</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>30 Minutes</span>
+                            </div>
+                            <div class="test-stat">
+                                <i class="fas fa-users"></i>
+                                <span>1,567 Attempts</span>
+                            </div>
+                        </div>
+                        <p class="test-description">Comprehensive Nepali language test covering grammar, literature, and composition.</p>
+                        <div class="difficulty-indicator">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot medium active"></div>
+                                <div class="difficulty-dot"></div>
+                                <div class="difficulty-dot"></div>
+                            </div>
+                        </div>
+                        <a href="nepali-language.html" class="test-btn">Start Test</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <img src="../images/logo.png" alt="Logo">
+                        <h2>Loksewa Prep</h2>
+                    </div>
+                    <p>Created by Suyog Pandey, NIST College student, to help fellow Loksewa aspirants.</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> suyog@loksewaprep.com</li>
+                        <li><i class="fas fa-phone"></i> +977 9866299930</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Loksewa Prep by Suyog Pandey</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // filter tests function - made by suyog
+        function filterTests(category) {
+            var tests = document.querySelectorAll('.test-card');
+            var buttons = document.querySelectorAll('.filter-btn');
+            
+            // remove active from all buttons
+            buttons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            
+            // add active to clicked button
+            event.target.classList.add('active');
+            
+            // show/hide tests
+            tests.forEach(function(test) {
+                if (category === 'all' || test.getAttribute('data-category') === category) {
+                    test.style.display = 'block';
+                } else {
+                    test.style.display = 'none';
+                }
+            });
+        }
+
+        // search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var searchTerm = this.value.toLowerCase();
+            var tests = document.querySelectorAll('.test-card');
+            
+            tests.forEach(function(test) {
+                var title = test.querySelector('h3').textContent.toLowerCase();
+                var description = test.querySelector('.test-description').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    test.style.display = 'block';
+                } else {
+                    test.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Materials - Loksewa Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .materials-container {
+            padding: 60px 0;
+        }
+        
+        .materials-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .materials-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .materials-header p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .material-card {
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .material-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .material-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .material-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .material-header p {
+            opacity: 0.9;
+        }
+        
+        .material-content {
+            padding: 25px;
+        }
+        
+        .material-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .material-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .material-info i {
+            color: var(--primary-color);
+        }
+        
+        .material-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .material-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .material-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        
+        .material-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .material-link i {
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .material-link:hover i {
+            color: white;
+        }
+        
+        .external-resources {
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .external-resources h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .external-resources h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .external-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .external-link-card {
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .external-link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .external-link-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        
+        .external-link-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+        
+        .external-link-card a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .external-links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../images/logo.png" alt="Loksewa Prep Logo">
+                <h1>Loksewa Prep</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../syllabus/index.html">Syllabus</a></li>
+                    <li><a href="../mock-tests/index.html">Mock Tests</a></li>
+                    <li><a href="../study-materials/index.html" class="active">Study Materials</a></li>
+                    <li><a href="../previous-papers/index.html">Previous Papers</a></li>
+                    <li><a href="../tips/index.html">Tips</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+                <div class="theme-toggle">
+                    <input type="checkbox" id="theme-toggle-checkbox">
+                    <label for="theme-toggle-checkbox" class="theme-toggle-label">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                        <div class="ball"></div>
+                    </label>
+                </div>
+                <div class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="materials-container">
+        <div class="container">
+            <div class="materials-header">
+                <h1>Study Materials</h1>
+                <p>Comprehensive study materials, notes, and resources to help you prepare effectively for your Loksewa examination.</p>
+            </div>
+            
+            <div class="external-resources">
+                <h2>External Study Resources</h2>
+                <div class="external-links-grid">
+                    <div class="external-link-card">
+                        <h3><i class="fas fa-globe"></i> Nepal's Geography and Natural Resources</h3>
+                        <a href="https://loksewaaspirants.com/geography-of-nepal-gk-pdf-notes/" target="_blank">
+                            https://loksewaaspirants.com/geography-of-nepal-gk-pdf-notes/
+                        </a>
+                    </div>
+                    
+                    <div class="external-link-card">
+                        <h3><i class="fas fa-book"></i> Nepali Grammar and Literature</h3>
+                        <a href="https://docs.google.com/document/d/12HVbQ13qCMhyaGZXdckXRCfWhMRUwPiBYVu-_b1Htxk/edit?usp=sharing" target="_blank">
+                            https://docs.google.com/document/d/12HVbQ13qCMhyaGZXdckXRCfWhMRUwPiBYVu-_b1Htxk/edit?usp=sharing
+                        </a>
+                    </div>
+                    
+                    <div class="external-link-card">
+                        <h3><i class="fas fa-language"></i> English Language Proficiency Guide</h3>
+                        <a href="https://loksewagyan.com/content/3/58" target="_blank">
+                            https://loksewagyan.com/content/3/58
+                        </a>
+                    </div>
+                    
+                    <div class="external-link-card">
+                        <h3><i class="fas fa-calculator"></i> Mathematics Problem Solving Techniques</h3>
+                        <a href="https://www.loksewasathi.com/kharidar-maths3-1-fundamental-operations-of-mathematics-and-unitary-method-free-pdf/" target="_blank">
+                            https://www.loksewasathi.com/kharidar-maths3-1-fundamental-operations-of-mathematics-and-unitary-method-free-pdf/
+                        </a>
+                    </div>
+                    
+                    <div class="external-link-card">
+                        <h3><i class="fas fa-brain"></i> IQ & Reasoning (Logical Reasoning and Problem Solving)</h3>
+                        <a href="https://loksewaaspirants.com/loksewa-iq-pdf-book-download/" target="_blank">
+                            https://loksewaaspirants.com/loksewa-iq-pdf-book-download/
+                        </a>
+                    </div>
+                    
+                    <div class="external-link-card">
+                        <h3><i class="fas fa-landmark"></i> History – Nepal's History and Political Development</h3>
+                        <a href="https://loksewaaspirants.com/history-of-nepal-gk-pdf-notes/" target="_blank">
+                            https://loksewaaspirants.com/history-of-nepal-gk-pdf-notes/
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="materials-grid">
+                <div class="material-card">
+                    <div class="material-header">
+                        <h3>General Knowledge</h3>
+                        <p>Comprehensive GK materials for all levels</p>
+                    </div>
+                    <div class="material-content">
+                        <div class="material-info">
+                            <span><i class="fas fa-file-pdf"></i> PDF Format</span>
+                            <span><i class="fas fa-download"></i> Free Download</span>
+                        </div>
+                        <div class="material-description">
+                            Complete general knowledge materials covering Nepal's geography, history, politics, economy, and current affairs.
+                        </div>
+                        <div class="material-links">
+                            <a href="../categories/general-knowledge/index.html" class="material-link">
+                                <i class="fas fa-eye"></i>
+                                View Online
+                            </a>
+                            <a href="#" class="material-link">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-header">
+                        <h3>Mathematics</h3>
+                        <p>Complete math preparation guide</p>
+                    </div>
+                    <div class="material-content">
+                        <div class="material-info">
+                            <span><i class="fas fa-file-pdf"></i> PDF Format</span>
+                            <span><i class="fas fa-download"></i> Free Download</span>
+                        </div>
+                        <div class="material-description">
+                            Arithmetic, algebra, geometry, statistics, and problem-solving techniques with solved examples.
+                        </div>
+                        <div class="material-links">
+                            <a href="materials/mathematics.html" class="material-link">
+                                <i class="fas fa-eye"></i>
+                                View Online
+                            </a>
+                            <a href="#" class="material-link">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-header">
+                        <h3>English Language</h3>
+                        <p>Grammar, vocabulary, and comprehension</p>
+                    </div>
+                    <div class="material-content">
+                        <div class="material-info">
+                            <span><i class="fas fa-file-pdf"></i> PDF Format</span>
+                            <span><i class="fas fa-download"></i> Free Download</span>
+                        </div>
+                        <div class="material-description">
+                            English grammar rules, vocabulary building, reading comprehension, and writing skills improvement.
+                        </div>
+                        <div class="material-links">
+                            <a href="materials/english.html" class="material-link">
+                                <i class="fas fa-eye"></i>
+                                View Online
+                            </a>
+                            <a href="#" class="material-link">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-header">
+                        <h3>Nepali Language</h3>
+                        <p>Grammar, literature, and composition</p>
+                    </div>
+                    <div class="material-content">
+                        <div class="material-info">
+                            <span><i class="fas fa-file-pdf"></i> PDF Format</span>
+                            <span><i class="fas fa-download"></i> Free Download</span>
+                        </div>
+                        <div class="material-description">
+                            Nepali grammar fundamentals, literature analysis, essay writing, and language proficiency development.
+                        </div>
+                        <div class="material-links">
+                            <a href="materials/nepali.html" class="material-link">
+                                <i class="fas fa-eye"></i>
+                                View Online
+                            </a>
+                            <a href="#" class="material-link">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-header">
+                        <h3>Logical Reasoning</h3>
+                        <p>IQ and analytical thinking</p>
+                    </div>
+                    <div class="material-content">
+                        <div class="material-info">
+                            <span><i class="fas fa-file-pdf"></i> PDF Format</span>
+                            <span><i class="fas fa-download"></i> Free Download</span>
+                        </div>
+                        <div class="material-description">
+                            Logical reasoning, analytical thinking, pattern recognition, and problem-solving strategies.
+                        </div>
+                        <div class="material-links">
+                            <a href="materials/logical-reasoning.html" class="material-link">
+                                <i class="fas fa-eye"></i>
+                                View Online
+                            </a>
+                            <a href="#" class="material-link">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-header">
+                        <h3>Current Affairs</h3>
+                        <p>Latest news and developments</p>
+                    </div>
+                    <div class="material-content">
+                        <div class="material-info">
+                            <span><i class="fas fa-file-pdf"></i> PDF Format</span>
+                            <span><i class="fas fa-sync-alt"></i> Updated Monthly</span>
+                        </div>
+                        <div class="material-description">
+                            Current affairs covering national and international events, government policies, and recent developments.
+                        </div>
+                        <div class="material-links">
+                            <a href="materials/current-affairs.html" class="material-link">
+                                <i class="fas fa-eye"></i>
+                                View Online
+                            </a>
+                            <a href="#" class="material-link">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <img src="../images/logo.png" alt="Loksewa Prep Logo">
+                        <h2>Loksewa Prep</h2>
+                    </div>
+                    <p>Your comprehensive platform for Loksewa examination preparation with updated resources, mock tests, and study materials.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../faq.html">FAQs</a></li>
+                        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="../study-materials/index.html">Study Materials</a></li>
+                        <li><a href="../mock-tests/index.html">Mock Tests</a></li>
+                        <li><a href="../previous-papers/index.html">Previous Papers</a></li>
+                        <li><a href="../syllabus/index.html">Syllabus</a></li>
+                        <li><a href="../tips/index.html">Preparation Tips</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Kathmandu, Nepal</li>
+                        <li><i class="fas fa-phone"></i> +977 9812345678</li>
+                        <li><i class="fas fa-envelope"></i> info@loksewaprep.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Loksewa Prep. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

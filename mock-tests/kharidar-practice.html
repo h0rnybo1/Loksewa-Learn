@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kharidar Practice Test - Loksewa Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .test-container { padding: 40px 0; }
+        .test-header { 
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .question-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .question-text { font-size: 1.2em; margin-bottom: 20px; font-weight: 500; }
+        .options { list-style: none; padding: 0; }
+        .options li {
+            background: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .options li:hover { background: #e9ecef; }
+        .options li.selected { background: #d4edda; border-color: #28a745; }
+        .timer { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            background: #dc3545; 
+            color: white; 
+            padding: 15px; 
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../images/logo.png" alt="Logo">
+                <h1>Loksewa Prep</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../mock-tests/index.html" class="active">Mock Tests</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="timer" id="timer">45:00</div>
+
+    <section class="test-container">
+        <div class="container">
+            <div class="test-header">
+                <h1>Kharidar Practice Test</h1>
+                <p>Comprehensive test for Kharidar position</p>
+                <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                    <div><i class="fas fa-question-circle"></i><br>75 Questions</div>
+                    <div><i class="fas fa-clock"></i><br>45 Minutes</div>
+                    <div><i class="fas fa-star"></i><br>Medium Level</div>
+                </div>
+                <p>Question <span id="current-q">1</span> of 75</p>
+            </div>
+
+            <div class="question-box" id="question-container">
+                <!-- questions here -->
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                <button class="btn btn-secondary" id="prev-btn" onclick="prevQuestion()">Previous</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next</button>
+                <button class="btn btn-primary" id="submit-btn" onclick="submitTest()" style="display:none;">Submit</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // kharidar questions - harder level
+        var questions = [
+            {
+                q: "नेपालको संविधान २०७२ अनुसार स्थानीय तहको संख्या कति छ?",
+                options: ["७५३", "७५४", "७५५", "७५६"],
+                correct: 0
+            },
+            {
+                q: "If 3x + 7 = 22, then what is the value of 6x + 14?",
+                options: ["30", "44", "58", "72"],
+                correct: 1
+            },
+            {
+                q: "Which of the following is the correct passive voice of 'They are building a new school'?",
+                options: [
+                    "A new school is being built by them",
+                    "A new school was being built by them", 
+                    "A new school has been built by them",
+                    "A new school will be built by them"
+                ],
+                correct: 0
+            },
+            {
+                q: "नेपालको कुन प्रदेशमा सबैभन्दा बढी जिल्ला छन्?",
+                options: ["प्रदेश नं. १", "मधेश प्रदेश", "बागमती प्रदेश", "कर्णाली प्रदेश"],
+                correct: 3
+            },
+            {
+                q: "A train travels 240 km in 4 hours. What is its speed in meters per second?",
+                options: ["16.67 m/s", "60 m/s", "240 m/s", "15 m/s"],
+                correct: 0
+            },
+            {
+                q: "Choose the correct synonym for 'Abundant':",
+                options: ["Scarce", "Plentiful", "Limited", "Rare"],
+                correct: 1
+            },
+            {
+                q: "नेपालको राष्ट्रिय चरा कुन हो?",
+                options: ["डाँफे", "गरुड", "बाज", "कौवा"],
+                correct: 0
+            },
+            {
+                q: "If the area of a square is 144 sq cm, what is its perimeter?",
+                options: ["48 cm", "36 cm", "24 cm", "12 cm"],
+                correct: 0
+            },
+            {
+                q: "Fill in the blank: 'I have been waiting _____ two hours.'",
+                options: ["since", "for", "from", "till"],
+                correct: 1
+            },
+            {
+                q: "नेपालको पहिलो निर्वाचित प्रधानमन्त्री को हुन्?",
+                options: ["बी.पी. कोइराला", "मातृका प्रसाद कोइराला", "तंका प्रसाद आचार्य", "के.आई. सिंह"],
+                correct: 0
+            },
+            {
+                q: "What is 25% of 80?",
+                options: ["15", "20", "25", "30"],
+                correct: 1
+            },
+            {
+                q: "Which tense is used in: 'She will have completed her work by tomorrow'?",
+                options: ["Future Perfect", "Future Continuous", "Present Perfect", "Past Perfect"],
+                correct: 0
+            },
+            {
+                q: "नेपालको सबैभन्दा लामो नदी कुन हो?",
+                options: ["कोशी", "गण्डकी", "कर्णाली", "महाकाली"],
+                correct: 2
+            },
+            {
+                q: "A shopkeeper sells an item for Rs. 120 after giving 20% discount. What was the marked price?",
+                options: ["Rs. 144", "Rs. 150", "Rs. 160", "Rs. 180"],
+                correct: 1
+            },
+            {
+                q: "Choose the correct antonym for 'Optimistic':",
+                options: ["Hopeful", "Positive", "Pessimistic", "Confident"],
+                correct: 2
+            }
+        ];
+
+        var currentQuestion = 0;
+        var userAnswers = [];
+        var timeLeft = 2700; // 45 minutes
+
+        function startTimer() {
+            setInterval(function() {
+                timeLeft--;
+                var minutes = Math.floor(timeLeft / 60);
+                var seconds = timeLeft % 60;
+                document.getElementById('timer').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                
+                if (timeLeft <= 0) {
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            var q = questions[currentQuestion];
+            var html = '<div class="question-text">' + (currentQuestion + 1) + '. ' + q.q + '</div>';
+            html += '<ul class="options">';
+            
+            for (var i = 0; i < q.options.length; i++) {
+                var selected = userAnswers[currentQuestion] === i ? 'selected' : '';
+                html += '<li class="' + selected + '" onclick="selectAnswer(' + i + ')">' + 
+                       String.fromCharCode(65 + i) + '. ' + q.options[i] + '</li>';
+            }
+            html += '</ul>';
+            
+            document.getElementById('question-container').innerHTML = html;
+            document.getElementById('current-q').innerHTML = currentQuestion + 1;
+            
+            document.getElementById('prev-btn').style.display = currentQuestion === 0 ? 'none' : 'inline-block';
+            document.getElementById('next-btn').style.display = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
+            document.getElementById('submit-btn').style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+        }
+
+        function selectAnswer(index) {
+            userAnswers[currentQuestion] = index;
+            var options = document.querySelectorAll('.options li');
+            options.forEach(function(option, i) {
+                option.classList.remove('selected');
+                if (i === index) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function submitTest() {
+            var score = 0;
+            for (var i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correct) {
+                    score++;
+                }
+            }
+            
+            var percentage = Math.round((score / questions.length) * 100);
+            alert('Test Completed!\nScore: ' + score + '/' + questions.length + ' (' + percentage + '%)');
+            window.location.href = 'index.html';
+        }
+
+        window.onload = function() {
+            loadQuestion();
+            startTimer();
+        };
+    </script>
+</body>
+</html>

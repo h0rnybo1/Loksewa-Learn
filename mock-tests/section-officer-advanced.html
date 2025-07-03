@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section Officer Advanced Test - Loksewa Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Quiz specific styles with proper contrast */
+        .test-container { 
+            padding: 40px 0; 
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+        .test-header { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .test-info { 
+            display: flex; 
+            justify-content: space-around; 
+            margin: 20px 0; 
+        }
+        .test-info div { 
+            text-align: center; 
+            color: white;
+        }
+        .question-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .question-text { 
+            font-size: 1.2em; 
+            margin-bottom: 20px; 
+            font-weight: 500;
+            color: #333;
+        }
+        .options { 
+            list-style: none; 
+            padding: 0; 
+        }
+        .options li {
+            background: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            color: #333;
+        }
+        .options li:hover { 
+            background: #e9ecef; 
+            transform: translateX(5px); 
+        }
+        .options li.selected { 
+            background: #d4edda; 
+            border-color: #28a745; 
+            color: #155724;
+        }
+        .nav-buttons { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-top: 30px; 
+        }
+        .btn { 
+            padding: 12px 25px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-primary { 
+            background: #007bff; 
+            color: white; 
+        }
+        .btn-primary:hover { 
+            background: #0056b3; 
+            transform: translateY(-2px); 
+        }
+        .btn-secondary { 
+            background: #6c757d; 
+            color: white; 
+        }
+        .timer { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            background: #dc3545; 
+            color: white; 
+            padding: 15px; 
+            border-radius: 10px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        
+        /* Ensure proper text contrast */
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .container {
+            color: #333;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #333;
+        }
+        
+        p, span, div {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <header style="background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div class="container">
+            <div class="logo">
+                <img src="../images/logo.png" alt="Logo">
+                <h1 style="color: #fbbf24;">Loksewa Prep</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html" style="color: #333;">Home</a></li>
+                    <li><a href="../syllabus/index.html" style="color: #333;">Syllabus</a></li>
+                    <li><a href="../mock-tests/index.html" class="active" style="color: #4f46e5;">Mock Tests</a></li>
+                    <li><a href="../study-materials/index.html" style="color: #333;">Study Materials</a></li>
+                    <li><a href="../previous-papers/index.html" style="color: #333;">Previous Papers</a></li>
+                    <li><a href="../about.html" style="color: #333;">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- timer -->
+    <div class="timer" id="timer">60:00</div>
+
+    <section class="test-container">
+        <div class="container">
+            <div class="test-header">
+                <h1>Section Officer Advanced Test</h1>
+                <p>Challenging questions for serious aspirants</p>
+                <div class="test-info">
+                    <div><i class="fas fa-question-circle"></i><br>75 Questions</div>
+                    <div><i class="fas fa-clock"></i><br>60 Minutes</div>
+                    <div><i class="fas fa-star"></i><br>Difficulty: Hard</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress" style="width: 0%"></div>
+                </div>
+                <p>Question <span id="current-q">1</span> of 75</p>
+            </div>
+
+            <div class="question-box" id="question-container">
+                <!-- questions loaded here -->
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prev-btn" onclick="prevQuestion()">Previous</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next</button>
+                <button class="btn btn-primary" id="submit-btn" onclick="submitTest()" style="display:none;">Submit Test</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Advanced test questions - made by suyog
+        var questions = [
+            {
+                q: "Which constitutional provision in Nepal establishes the principle of separation of powers between the executive, legislative, and judicial branches?",
+                options: [
+                    "Article 56 - Distribution of State Power",
+                    "Article 126 - Independence of Judiciary", 
+                    "Article 76 - Appointment of Prime Minister",
+                    "Article 94 - Federal Parliament"
+                ],
+                correct: 0
+            },
+            {
+                q: "The concept of 'Cooperative Federalism' in Nepal's constitution primarily emphasizes:",
+                options: [
+                    "Competition between federal, provincial and local governments",
+                    "Coordination and collaboration among different levels of government",
+                    "Centralized decision-making process",
+                    "Independent functioning of each level of government"
+                ],
+                correct: 1
+            },
+            {
+                q: "Which of the following is NOT a fundamental right guaranteed by Nepal's Constitution 2015?",
+                options: [
+                    "Right to Employment with adequate remuneration",
+                    "Right to Information",
+                    "Right to Constitutional Remedy",
+                    "Right to Property (unlimited)"
+                ],
+                correct: 3
+            },
+            {
+                q: "The 'One Madhesh One Pradesh' movement was primarily associated with which political demand?",
+                options: [
+                    "Separate nation for Madheshi people",
+                    "Single province covering entire Tarai region",
+                    "Special autonomy for Madheshi communities",
+                    "Proportional representation in all government bodies"
+                ],
+                correct: 1
+            },
+            {
+                q: "Nepal's transition from a unitary to federal system was primarily influenced by:",
+                options: [
+                    "Economic development needs",
+                    "International pressure",
+                    "Demands for inclusion and representation of marginalized groups",
+                    "Administrative efficiency requirements"
+                ],
+                correct: 2
+            },
+            {
+                q: "The concept of 'Secularism' in Nepal's constitution means:",
+                options: [
+                    "Complete separation of religion from state affairs",
+                    "Protection of ancient religion and culture while maintaining religious freedom",
+                    "Promotion of atheism by the state",
+                    "Equal state support to all religions"
+                ],
+                correct: 1
+            },
+            {
+                q: "Which river system contributes the highest percentage to Nepal's total water resources?",
+                options: [
+                    "Koshi River System (28%)",
+                    "Gandaki River System (32%)",
+                    "Karnali River System (40%)",
+                    "Mahakali River System (15%)"
+                ],
+                correct: 2
+            },
+            {
+                q: "The 'Millennium Challenge Corporation (MCC) Compact' signed between Nepal and USA primarily focuses on:",
+                options: [
+                    "Military cooperation and security",
+                    "Educational exchange programs",
+                    "Infrastructure development and energy transmission",
+                    "Trade and commerce facilitation"
+                ],
+                correct: 2
+            },
+            {
+                q: "Nepal's 'Graduated Response Strategy' during COVID-19 pandemic included all EXCEPT:",
+                options: [
+                    "Prohibitory orders in high-risk areas",
+                    "Complete international border closure",
+                    "Selective lockdowns based on risk assessment",
+                    "Mandatory vaccination for all citizens"
+                ],
+                correct: 3
+            },
+            {
+                q: "The 'Digital Nepal Framework' aims to achieve which of the following by 2025?",
+                options: [
+                    "100% internet penetration in rural areas",
+                    "Digital transformation of all government services",
+                    "Establishment of IT parks in all 77 districts",
+                    "Complete digitization of all educational institutions"
+                ],
+                correct: 1
+            },
+            {
+                q: "Which principle of public administration emphasizes that authority should be delegated to the lowest competent level?",
+                options: [
+                    "Principle of Unity of Command",
+                    "Principle of Subsidiarity",
+                    "Principle of Span of Control",
+                    "Principle of Scalar Chain"
+                ],
+                correct: 1
+            },
+            {
+                q: "The 'New Public Management' approach primarily emphasizes:",
+                options: [
+                    "Bureaucratic hierarchy and rule-based administration",
+                    "Market-oriented reforms and performance measurement",
+                    "Political control over administrative decisions",
+                    "Traditional administrative procedures and protocols"
+                ],
+                correct: 1
+            },
+            {
+                q: "In the context of Nepal's civil service, 'Performance Based Promotion System' was introduced to:",
+                options: [
+                    "Reduce the number of civil servants",
+                    "Link career advancement with job performance and competency",
+                    "Increase political control over bureaucracy",
+                    "Standardize salary structures across all levels"
+                ],
+                correct: 1
+            },
+            {
+                q: "The concept of 'Good Governance' includes all of the following EXCEPT:",
+                options: [
+                    "Transparency and Accountability",
+                    "Participatory Decision Making",
+                    "Centralized Authority Structure",
+                    "Rule of Law and Responsiveness"
+                ],
+                correct: 2
+            },
+            {
+                q: "Nepal's 'National Integrity Policy' primarily aims to:",
+                options: [
+                    "Promote national unity among diverse ethnic groups",
+                    "Combat corruption and promote ethical conduct in public service",
+                    "Strengthen national defense capabilities",
+                    "Preserve cultural heritage and traditions"
+                ],
+                correct: 1
+            }
+        ];
+
+        var currentQuestion = 0;
+        var userAnswers = [];
+        var timeLeft = 3600; // 60 minutes
+        var timerInterval;
+
+        // start timer
+        function startTimer() {
+            timerInterval = setInterval(function() {
+                timeLeft--;
+                var minutes = Math.floor(timeLeft / 60);
+                var seconds = timeLeft % 60;
+                document.getElementById('timer').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        // load question
+        function loadQuestion() {
+            var q = questions[currentQuestion];
+            var html = '<div class="question-text">' + (currentQuestion + 1) + '. ' + q.q + '</div>';
+            html += '<ul class="options">';
+            
+            for (var i = 0; i < q.options.length; i++) {
+                var selected = userAnswers[currentQuestion] === i ? 'selected' : '';
+                html += '<li class="' + selected + '" onclick="selectAnswer(' + i + ')">' + 
+                       String.fromCharCode(65 + i) + '. ' + q.options[i] + '</li>';
+            }
+            html += '</ul>';
+            
+            document.getElementById('question-container').innerHTML = html;
+            document.getElementById('current-q').innerHTML = currentQuestion + 1;
+            
+            // update progress
+            var progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+            
+            // show/hide buttons
+            document.getElementById('prev-btn').style.display = currentQuestion === 0 ? 'none' : 'inline-block';
+            document.getElementById('next-btn').style.display = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
+            document.getElementById('submit-btn').style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+        }
+
+        function selectAnswer(index) {
+            userAnswers[currentQuestion] = index;
+            var options = document.querySelectorAll('.options li');
+            options.forEach(function(option, i) {
+                option.classList.remove('selected');
+                if (i === index) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            var score = 0;
+            for (var i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correct) {
+                    score++;
+                }
+            }
+            
+            var percentage = Math.round((score / questions.length) * 100);
+            alert('Test Completed!\nYour Score: ' + score + '/' + questions.length + ' (' + percentage + '%)');
+            
+            // redirect to results page or mock tests
+            window.location.href = 'index.html';
+        }
+
+        // initialize test
+        window.onload = function() {
+            loadQuestion();
+            startTimer();
+        };
+
+        // prevent back button during test
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.returnValue = '';
+        });
+    </script>
+</body>
+</html>
